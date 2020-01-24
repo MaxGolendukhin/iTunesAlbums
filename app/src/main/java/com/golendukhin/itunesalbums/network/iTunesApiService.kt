@@ -1,4 +1,4 @@
-package com.golendukhin.itunesalbums.nework
+package com.golendukhin.itunesalbums.network
 
 import com.golendukhin.itunesalbums.grid.Results
 import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory

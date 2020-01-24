@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">iTunes Albums</string>
+    <string name="search_album">search album</string>
+    <string name="hint">album to search</string>
 </resources>

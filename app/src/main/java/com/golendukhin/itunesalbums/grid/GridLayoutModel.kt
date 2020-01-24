@@ -1,10 +1,10 @@
 package com.golendukhin.itunesalbums.grid
 
 import androidx.lifecycle.LiveData
+import androidx.lifecycle.MediatorLiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.golendukhin.itunesalbums.nework.iTunesApi
-import com.golendukhin.itunesalbums.nework.iTunesApiService
+import com.golendukhin.itunesalbums.network.iTunesApi
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
@@ -28,12 +28,9 @@ class GridLayoutModel : ViewModel() {
     private var viewModelJob = Job()
     private val coroutineScope = CoroutineScope(viewModelJob + Dispatchers.Main)
 
-    init {
-        getAlbums("Joe Dassin")
-    }
+    val searchTextMutableLiveData = MutableLiveData<String>()
 
-
-    private fun getAlbums(searchedAlbum: String) {
+    fun getAlbums(searchedAlbum: String) {
         coroutineScope.launch {
             var getAlbumsDeferred = iTunesApi.retrofitService.getAlbums(searchedAlbum.replace(" ", "+"), "album")
             try {

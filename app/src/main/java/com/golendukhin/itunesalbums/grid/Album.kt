@@ -2,7 +2,7 @@ package com.golendukhin.itunesalbums.grid
 
 import com.squareup.moshi.Json
 
-data class Results(
+data class Results (
     val results: List<Album>
 )
 
