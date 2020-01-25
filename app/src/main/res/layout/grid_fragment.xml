@@ -20,17 +20,15 @@
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:clipToPadding="false"
-            android:padding="6dp"
+            android:paddingStart="6dp"
+            android:paddingEnd="6dp"
             app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.0"
-            app:listData="@{viewModel.albums}"
+            app:gridData="@{viewModel.albums}"
             app:spanCount="2"
-            tools:itemCount="16"
             tools:listitem="@layout/grid_view_item" />
 
         <ImageView

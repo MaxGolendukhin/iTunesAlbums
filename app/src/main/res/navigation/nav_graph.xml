@@ -8,21 +8,21 @@
     <fragment
         android:id="@+id/grid_fragment"
         android:name="com.golendukhin.itunesalbums.grid.GridFragment"
-        android:label="fragment_overview"
-        tools:layout="@layout/grid_activity" >
-<!--        <action-->
-<!--            android:id="@+id/action_showDetail"-->
-<!--            app:destination="@id/detailFragment" />-->
+        android:label="grid_fragment"
+        tools:layout="@layout/grid_fragment">
+        <action
+            android:id="@+id/action_show_details"
+            app:destination="@+id/details_fragment"
+            app:popUpTo="@+id/grid_fragment" />
     </fragment>
 
-<!--    <fragment-->
-<!--        android:id="@+id/detailFragment"-->
-<!--        android:name="com.example.android.marsrealestate.detail.DetailFragment"-->
-<!--        android:label="fragment_detail"-->
-<!--        tools:layout="@layout/fragment_detail">-->
-<!--        <argument-->
-<!--            android:name="selectedProperty"-->
-<!--            app:argType="com.example.android.marsrealestate.network.MarsProperty" />-->
-<!--    </fragment>-->
-
+    <fragment
+        android:id="@+id/details_fragment"
+        android:name="com.golendukhin.itunesalbums.details.DetailsFragment"
+        android:label="details_fragment"
+        tools:layout="@layout/details_fragment">
+        <argument
+            android:name="album"
+            app:argType="com.golendukhin.itunesalbums.data.Album" />
+    </fragment>
 </navigation>

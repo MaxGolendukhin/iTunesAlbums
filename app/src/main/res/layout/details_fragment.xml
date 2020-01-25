@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <variable
+            name="viewModel"
+            type="com.golendukhin.itunesalbums.details.DetailsFragmentViewModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <ImageView
+            android:id="@+id/album_image_view"
+            android:layout_width="0dp"
+            android:layout_height="300dp"
+            app:imgUrl="@{viewModel.album.imageUrl}"
+            app:layout_constraintDimensionRatio="H,1:1"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:srcCompat="@tools:sample/avatars" />
+
+        <TextView
+            android:id="@+id/singer_text_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="24dp"
+            android:text="@{viewModel.album.artistName}"
+            android:textAppearance="@android:style/TextAppearance.DeviceDefault.Medium"
+            android:textSize="24sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/album_image_view"
+            tools:text="Joe Dassin" />
+
+        <TextView
+            android:id="@+id/album_text_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="24dp"
+            android:singleLine="false"
+            android:text="@{viewModel.album.collectionName}"
+            android:textAppearance="@android:style/TextAppearance.DeviceDefault.Large"
+            app:layout_constraintStart_toStartOf="@+id/singer_text_view"
+            app:layout_constraintTop_toBottomOf="@+id/singer_text_view"
+            tools:text="L'Amerique" />
+
+        <TextView
+            android:id="@+id/year_text_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="24dp"
+            android:textAppearance="@android:style/TextAppearance.DeviceDefault.Small"
+            app:albumYear="@{viewModel.album.releaseDate}"
+            app:layout_constraintStart_toStartOf="@+id/album_text_view"
+            app:layout_constraintTop_toBottomOf="@+id/album_text_view"
+            tools:text="1970" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/songs_list"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginBottom="2dp"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/year_text_view"
+            app:layout_constraintTop_toBottomOf="@+id/year_text_view"
+            app:listData="@{viewModel.songs}"
+            tools:listitem="@layout/list_item" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

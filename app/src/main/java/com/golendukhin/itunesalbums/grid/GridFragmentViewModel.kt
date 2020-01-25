@@ -1,10 +1,10 @@
 package com.golendukhin.itunesalbums.grid
 
 import androidx.lifecycle.LiveData
-import androidx.lifecycle.MediatorLiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.golendukhin.itunesalbums.network.iTunesApi
+import com.golendukhin.itunesalbums.data.Album
+import com.golendukhin.itunesalbums.network.AlbumsITunesApi
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
@@ -32,7 +32,8 @@ class GridLayoutModel : ViewModel() {
 
     fun getAlbums(searchedAlbum: String) {
         coroutineScope.launch {
-            var getAlbumsDeferred = iTunesApi.retrofitService.getAlbums(searchedAlbum.replace(" ", "+"), "album")
+            val getAlbumsDeferred = AlbumsITunesApi.retrofitService.getAlbums(searchedAlbum.replace(" ", "+"), "album")
+//            val getAlbumsDeferred = AlbumsITunesApi.retrofitService.getAlbums("him", "album")
             try {
                 _status.value = ApiStatus.LOADING
                 val listResult = getAlbumsDeferred.await()

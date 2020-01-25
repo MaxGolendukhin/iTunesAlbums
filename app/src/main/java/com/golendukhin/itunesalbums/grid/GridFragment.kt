@@ -8,9 +8,9 @@ import androidx.appcompat.widget.SearchView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
+import androidx.navigation.fragment.findNavController
 import com.golendukhin.itunesalbums.R
-import com.golendukhin.itunesalbums.databinding.GridActivityBinding
-
+import com.golendukhin.itunesalbums.databinding.GridFragmentBinding
 
 class GridFragment : Fragment() {
     private val gridLayoutModel: GridLayoutModel by lazy {
@@ -18,12 +18,18 @@ class GridFragment : Fragment() {
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        val binding = GridActivityBinding.inflate(inflater)
+        val binding = GridFragmentBinding.inflate(inflater)
         binding.lifecycleOwner = this
         binding.viewModel = gridLayoutModel
 
         binding.albumsGrid.adapter = AlbumsGridAdapter(AlbumsGridAdapter.OnClickListener {
             gridLayoutModel.displayAlbumDetails(it)
+        })
+        gridLayoutModel.navigateToSelectedAlbum.observe(this, Observer {
+            it?.let {
+                this.findNavController().navigate(GridFragmentDirections.actionShowDetails(it))
+                gridLayoutModel.displayAlbumDetailsCompleted()
+            }
         })
         gridLayoutModel.searchTextMutableLiveData.observe(this, Observer(gridLayoutModel::getAlbums))
 
@@ -50,12 +56,11 @@ class GridFragment : Fragment() {
     object Utils {
         fun hideSoftKeyBoard(context: Context, view: View) {
             try {
-                val imm = context.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
-                imm?.hideSoftInputFromWindow(view.windowToken, InputMethodManager.HIDE_NOT_ALWAYS)
+                val inputMethodManager = context.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+                inputMethodManager.hideSoftInputFromWindow(view.windowToken, InputMethodManager.HIDE_NOT_ALWAYS)
             } catch (e: Exception) {
                 e.printStackTrace()
             }
         }
     }
-
 }

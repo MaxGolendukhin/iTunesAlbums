@@ -1,6 +1,6 @@
 package com.golendukhin.itunesalbums.network
 
-import com.golendukhin.itunesalbums.grid.Results
+import com.golendukhin.itunesalbums.data.AlbumsResult
 import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
@@ -27,14 +27,14 @@ private val retrofit = Retrofit.Builder()
     .client(client)
     .build()
 
-interface iTunesApiService {
+interface AlbumsITunesApiService {
     @GET("search")
     fun getAlbums(
         @Query("term") searchedAlbum: String,
         @Query("entity") album: String):
-            Deferred<Results>
+            Deferred<AlbumsResult>
 }
 
-object iTunesApi {
-    val retrofitService : iTunesApiService by lazy { retrofit.create(iTunesApiService::class.java) }
+object AlbumsITunesApi {
+    val retrofitService : AlbumsITunesApiService by lazy { retrofit.create(AlbumsITunesApiService::class.java) }
 }

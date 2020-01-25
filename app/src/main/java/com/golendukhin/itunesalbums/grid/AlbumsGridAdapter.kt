@@ -5,6 +5,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import com.golendukhin.itunesalbums.data.Album
 import com.golendukhin.itunesalbums.databinding.GridViewItemBinding
 
 class AlbumsGridAdapter(private val onClickListener: OnClickListener) : ListAdapter<Album, AlbumsGridAdapter.AlbumViewHolder>(DiffCallback) {
@@ -14,9 +15,7 @@ class AlbumsGridAdapter(private val onClickListener: OnClickListener) : ListAdap
 
     override fun onBindViewHolder(holder: AlbumViewHolder, position: Int) {
         val album = getItem(position)
-        holder.itemView.setOnClickListener {
-            onClickListener.onClick(album)
-        }
+        holder.itemView.setOnClickListener { onClickListener.onClick(album) }
         holder.bind(album)
     }
 
