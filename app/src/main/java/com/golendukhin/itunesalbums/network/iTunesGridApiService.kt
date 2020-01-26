@@ -29,7 +29,7 @@ private val retrofit = Retrofit.Builder()
 
 interface AlbumsITunesApiService {
     @GET("search")
-    fun getAlbums(
+    fun getAlbumsAsync(
         @Query("term") searchedAlbum: String,
         @Query("entity") album: String):
             Deferred<AlbumsResult>

@@ -59,8 +59,5 @@ fun bindStatus(statusImageView: ImageView, apiStatus: ApiStatus?) {
 
 @BindingAdapter("albumYear")
 fun TextView.textToYear(releaseDate: String) {
-//    val simpleDateFormat = SimpleDateFormat(releaseDate)
-//    text = simpleDateFormat.format(Date())
-
     text = releaseDate.subSequence(0, 10)
 }

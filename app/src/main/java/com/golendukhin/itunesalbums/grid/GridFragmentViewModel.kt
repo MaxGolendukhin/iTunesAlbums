@@ -32,13 +32,12 @@ class GridLayoutModel : ViewModel() {
 
     fun getAlbums(searchedAlbum: String) {
         coroutineScope.launch {
-            val getAlbumsDeferred = AlbumsITunesApi.retrofitService.getAlbums(searchedAlbum.replace(" ", "+"), "album")
-//            val getAlbumsDeferred = AlbumsITunesApi.retrofitService.getAlbums("him", "album")
+            val getAlbumsDeferred = AlbumsITunesApi.retrofitService.getAlbumsAsync(searchedAlbum.replace(" ", "+"), "album")
             try {
                 _status.value = ApiStatus.LOADING
                 val listResult = getAlbumsDeferred.await()
                 _status.value = ApiStatus.DONE
-                _albums.value = listResult.results
+                _albums.value = listResult.results.sortedBy { it.collectionName }
             } catch (e: Exception) {
                 _status.value = ApiStatus.ERROR
                 _albums.value = ArrayList()
